@@ -4,7 +4,7 @@
 
 ## 1. Data sources
 
-This task is based on publicly available sequencing data from a study of **\[insert study topic here]**. The dataset includes multiple samples under different conditions (e.g., treated vs. control) and was originally sequenced using **\[insert platform, e.g., Illumina 2×150]**.
+This task is based on publicly available data from a study of **\Dynamics of Gut Microbiota After Fecal Microbiota Transplantation in Ulcerative Colitis: Success Linked to Control of Prevotellaceae**. The dataset includes multiple samples under different conditions (e.g., treated vs. control) and was originally sequenced using **\Illumina NovaSeq platform (100 bp single end read)**.
 The subsampled and cleaned FASTQs are stored in `data/` and are used as the inputs for the workflow.
 
 ---
@@ -37,7 +37,10 @@ CODE TO SUBSAMPLE
 ---
 
 ## 4. How the workflow works
-DESCRIBE THE WORKFLOW HERE - NOTE THE BELOW ARE JUST EXAMPLES, REPLACE WITH YOUR OWN - YOURS CAN TAKE A VERY DIFFERENT FORMAT
+Removal of host genome uses **\Bowtie2 to map reads to reference genome
+Filter unmapped paired reads from output using **\Samtools
+Quality Trimming, adapter removal and low complexity filtering is done with **\ Fastp
+Reports of mapping and quality trimming are generated with **\ MultiQC
 The workflow files is stored in `workflow/`.
 
 ---
@@ -45,7 +48,7 @@ The workflow files is stored in `workflow/`.
 ### Step 1 – Quality Control (example)
 
 **Purpose:** Remove low-quality reads and adapter sequences
-**Tools:** `fastp`, `cutadapt`, `trimmomatic`
+**Tools:**   `Bowtie2`, `samtools`
 **Inputs:** Subsampled FASTQ files (from `data/fastq_subsampled/`)
 **Outputs:** Cleaned FASTQs, QC reports (`.html`, `.json`, or `.txt`)
 **Command:**
