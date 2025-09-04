@@ -45,11 +45,11 @@ The workflow files is stored in `workflow/`.
 
 ---
 
-### Step 1 – Host Removal
+### Step 1 – Quality Control (example)
 
-**Purpose:** Remove host-derived reads (e.g., human DNA) to focus on microbial content
-**Tools:**   Bowtie2, samtools
-**Inputs:** Raw paired-end FASTQ files of subsample (*_R1.fastq.gz, *_R2.fastq.gz), host genome index
+**Purpose:** Remove low-quality reads and adapter sequences
+**Tools:**   `Bowtie2`, `samtools`
+**Inputs:** Subsampled FASTQ files (from `data/fastq_subsampled/`)
 **Outputs:** Cleaned FASTQs, QC reports (`.html`, `.json`, or `.txt`)
 **Command:**
 
@@ -59,39 +59,22 @@ fastp --in1 sample.fastq.gz --out1 cleaned.fastq.gz ...
 
 ---
 
-### Step 2 Quality Trimming & Adapter Removal
+### Step 2 ...
 
-**Purpose:** Remove low-quality bases and adapter sequences to improve downstream analyses
-**Tools:** fastp
-**Inputs:** Host-filtered paired-end FASTQ files (*_hostRemoved_R1.fastq.gz, *_hostRemoved_R2.fastq.gz)
-**Outputs:** Cleaned paired-end FASTQ files (*_trimmed_R1.fastq.gz, *_trimmed_R2.fastq.gz), QC reports (*_fastp.html, *_fastp.json)
+**Purpose:** ...
+**Tools:** ...
+**Inputs:** ...
+**Outputs:** ...
 **Command:**
 
-```bash
-fastp \
-  --in1 sample_hostRemoved_R1.fastq.gz \
-  --in2 sample_hostRemoved_R2.fastq.gz \
-  --out1 sample_trimmed_R1.fastq.gz \
-  --out2 sample_trimmed_R2.fastq.gz \
-  --cut_right --cut_window_size 4 --cut_mean_quality 20 \
-  -l 50 \
-  --detect_adapter_for_pe \
-  -y \
-  --thread 8 \
-  --html sample_fastp.html \
-  --json sample_fastp.json
-```
 
 ---
 
-### Step 3 – Generate Summary Report
+### Step X – Analysis (e.g., DESeq2, variant calling, etc.)
 
-**Purpose:** Aggregate QC results across all samples for easy interpretation
-**Tools:** MultiQC
-**Inputs:** Logs and reports from bowtie2, samtools, and fastp (*.html, *.json, *.txt)
-**Outputs:** Combined QC report (multiqc_report.html)
+**Purpose:** ...
+**Tools:** ...
+**Inputs:** ...
+**Outputs:** ...
 **Command:**
 
-```
-multiqc . -o multiqc_report
-```
