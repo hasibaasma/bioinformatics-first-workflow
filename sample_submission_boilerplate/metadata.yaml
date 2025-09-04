@@ -1,8 +1,8 @@
-paper_title: Drug-tolerant persister RNA-seq reveals transcriptional shift
-doi: 10.1101/2024.06.15.123456
-data_source: "SRA: SRP456789"
-domain: rna_seq
-ref_genome: H37Rv (ASM19595v2)
-tools: [fastp 0.23.4, bwa 0.7.17, samtools 1.20, featureCounts 2.0.4, DESeq2 1.40.2]
-estimated_runtime_minutes: 45
-estimated_time_for_human: 50
+paper_title: Dynamics of Gut Microbiota After Fecal Microbiota Transplantation in Ulcerative Colitis
+doi: 10.1093/ecco-jcc/jjae137
+data_source: "SRA: SRX23490737"
+domain: 16sRNA
+ref_genome: GRCh8.p7
+tools: [bowtie2 2.4.2, samtools 1.11, fastp 0.20.1, MuktiQC 1.9]
+estimated_runtime_minutes: 
+estimated_time_for_human: 
