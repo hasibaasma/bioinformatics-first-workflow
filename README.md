@@ -41,7 +41,7 @@ Removal of host genome uses **\Bowtie2 to map reads to reference genome
 Filter unmapped paired reads from output using **\Samtools  
 Quality Trimming, adapter removal and low complexity filtering is done with **\ Fastp  
 Reports of mapping and quality trimming are generated with **\ MultiQC  
-The workflow files is stored in `workflow/`.
+The workflow files is stored in `workflow/`.  
 
 ---
 ### Step 1 - Organize your files
@@ -79,14 +79,14 @@ bowtie2-build GRCh38.fa host_reference
 **Inputs:**  
 Paired-end FASTQ files after host removal  
   sample1_hostRemoved_R1.fastq.gz
-  sample1_hostRemoved_R2.fastq.gz
+  sample1_hostRemoved_R2.fastq.gz  
 **Outputs:**  
-Cleaned FASTQ files
-  sample1_trimmed_R1.fastq.gz
-  sample1_trimmed_R2.fastq.gz
-QC reports  
+Cleaned FASTQ files  
+  sample1_trimmed_R1.fastq.gz  
+  sample1_trimmed_R2.fastq.gz  
+QC reports    
   sample1_fastp.html (interactive QC report)
-  sample1_fastp.json (machine-readable QC summary)
+  sample1_fastp.json (machine-readable QC summary)  
 **Command:**
 ```
 fastp \
@@ -116,9 +116,9 @@ Log files and reports from previous steps, e.g.:
   Samtools filtering logs (if any)
   Fastp QC outputs (*.html, *.json)
 **Outputs:**  
-  Combined QC report:
-  multiqc_report.html (interactive summary)
-  multiqc_data/ (supporting data files)
+  Combined QC report:  
+  multiqc_report.html (interactive summary)  
+  multiqc_data/ (supporting data files)  
 **Command:**  
 ```
 multiqc . -o multiqc_report
