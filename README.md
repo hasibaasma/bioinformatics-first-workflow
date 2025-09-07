@@ -4,7 +4,7 @@
 
 ## 1. Data sources
 
-This task is based on publicly available data from a study of **\ Dynamics of Gut Microbiota After Fecal Microbiota Transplantation in Ulcerative Colitis: Success Linked to Control of Prevotellaceae**. The dataset includes multiple samples under different conditions (e.g., treated vs. control) and was originally sequenced using **\Illumina NovaSeq platform (100 bp single end read)**.
+This task is based on publicly available data from a study of **Dynamics of Gut Microbiota After Fecal Microbiota Transplantation in Ulcerative Colitis: Success Linked to Control of Prevotellaceae**. (https://pmc.ncbi.nlm.nih.gov/articles/PMC11836888/#s27) The dataset includes multiple samples under different conditions (209 samples) and was originally sequenced using **Illumina NovaSeq platform (100 bp single end read)**.
 The subsampled and cleaned FASTQs are stored in `data/` and are used as the inputs for the workflow.
 
 ---
