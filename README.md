@@ -50,16 +50,16 @@ The input files is stored in `data/`.
 
 ---
 ### Step 1 - Organize your files
-**Purpose:** Ensure raw sequencing reads are consistently named for downstream workflow compatibility (especially with paired-end reads).  
+**Purpose:** Ensure raw single-end sequencing reads are consistently named for downstream workflow compatibility.  
 **Tools:** None (manual or scripting via mv, rename, or bash loop).  
 **Inputs:** Raw FASTQ files with arbitrary names from sequencing provider.  
-**Outputs:** Renamed FASTQ files following convention:  
-  sample1_R1.fastq.gz (forward reads)  
-  sample1_R2.fastq.gz (reverse reads)  
+**Outputs:** Renamed FASTQ files following convention:
+sample1.fastq.gz
+sample2.fastq.gz
 **Command:**
 ```
-rename 's/(.*)_1\.fastq\.gz/$1_R1.fastq.gz/' *.fastq.gz  
-rename 's/(.*)_2\.fastq\.gz/$1_R2.fastq.gz/' *.fastq.gz  
+# Example using rename to standardize to sampleX.fastq.gz
+rename 's/(.*)\.fastq\.gz$/sample_$1.fastq.gz/' *.fastq.gz 
 ```
 ---
 
