@@ -30,9 +30,14 @@ data/SRR27827162.fastq
 
 ## 3. Pre-processing / subsampling
 
-INCLUDE THE METHOD YOU USED TO SUBSAMPLE, MINATURIZE, OR TRIM DOWN
+To make the dataset smaller and faster to process for testing, I randomly subsampled reads using seqtk. So to keep 10% of reads this was done  
+```.
+for f in data/*.fastq; do
+    base=$(basename $f .fastq)
+    seqtk sample -s100 $f 0.1 > data/${base}_sub.fastq
+done
 
-1. **STEP 1** ...
+```
 
 ---
 
