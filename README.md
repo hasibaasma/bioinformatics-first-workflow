@@ -124,7 +124,6 @@ sample_fastp.json   # machine-readable QC summary
 ```
 fastp \
   --in1 sample_hostRemoved.fastq.gz \
-  --in2 sample_hostRemoved_R2.fastq.gz \
   --out1 sample_trimmed.fastq.gz \
   --cut_right --cut_window_size 4 --cut_mean_quality 20 \
   -l 50 \
