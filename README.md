@@ -9,26 +9,43 @@ The subsampled and cleaned FASTQs are stored in `data/` and are used as the inpu
 
 ---
 
-## 2. How to download
+## 2.Get list of SRR IDs (10) under one BioProject (PRJNA1071720)
+Download a random list of 10 SRA run IDs belonging to the given BioProject using the following script:
 
-The raw data can be downloaded from NCBI’s SRA database using the SRA Toolkit. For example, to download a sample (SRR27827162) into the data/ folder:
+Get_list.sh
 ```
-mkdir -p data
+#!/bin/bash
+esearch -db sra -query PRJNA1071720 \
+  | efetch -format runinfo \
+  | cut -d',' -f1 \
+  | grep SRR \
+  | shuf \
+  | head -n 10 > sra_ids_10.txt
 
-# Download FASTQ using fasterq-dump
-fasterq-dump SRR27827162 \
-  --threads 8 \
-  --outdir data
 
 ```
-This will generate
+This will generate list of 10 sample SR ids
 ```
-data/SRR27827162.fastq
+sra_ids_10.txt
+```
+
+## 3. Download data for the selected runs
+
+Use the following script to fetch the FASTQ files for each SRR ID:
+
+Get_data.sh
+```
+#!/bin/bash
+while read SRR; do
+    fasterq-dump --split-files --threads 8 $SRR -O data/
+done < sra_ids_10.txt
+
 ```
 
 ---
 
-## 3. Pre-processing / subsampling
+
+## 4. Pre-processing / subsampling
 
 To make the dataset smaller and faster to process for testing, I randomly subsampled reads using seqtk. So to keep 10% of reads this was done  
 ```.
@@ -41,12 +58,18 @@ done
 
 ---
 
-## 4. How the workflow works
+## 5. How the workflow works
+Workflow can be executed in the same directory as data by executing this command
+```
+bash workflow.sh
+```
+Workflow consist of following tasks:
 Removal of host genome uses **Bowtie2** to map reads to reference genome  
 Filter unmapped paired reads from output using **Samtools**  
 Quality Trimming, adapter removal and low complexity filtering is done with **\ Fastp** 
 Reports of mapping and quality trimming are generated with **\ MultiQC**  
-The input files is stored in `data/`.  
+The input files is stored in `data/`.
+
 
 ---
 ### Step 1 - Organize your files
@@ -82,23 +105,27 @@ bowtie2-build GRCh38.fa host_reference
 **Purpose:** Improve read quality by removing low-quality bases, adapters, and very short reads. This ensures better mapping and reduces false positives in downstream analyses.  
 **Tools:** fastp  
 **Inputs:**  
-Paired-end FASTQ files after host removal  
-  sample1_hostRemoved_R1.fastq.gz
-  sample1_hostRemoved_R2.fastq.gz  
+Single-end FASTQ file after host removal
+ ```
+ sample_hostRemoved.fastq.gz
+```
 **Outputs:**  
 Cleaned FASTQ files  
-  sample1_trimmed_R1.fastq.gz  
-  sample1_trimmed_R2.fastq.gz  
+ ```
+sample_trimmed.fastq.gz
+``` 
 QC reports    
-  sample1_fastp.html (interactive QC report)
-  sample1_fastp.json (machine-readable QC summary)  
+```
+sample_fastp.html   # interactive QC report
+sample_fastp.json   # machine-readable QC summary
+
+```
 **Command:**
 ```
 fastp \
-  --in1 sample_hostRemoved_R1.fastq.gz \
+  --in1 sample_hostRemoved.fastq.gz \
   --in2 sample_hostRemoved_R2.fastq.gz \
-  --out1 sample_trimmed_R1.fastq.gz \
-  --out2 sample_trimmed_R2.fastq.gz \
+  --out1 sample_trimmed.fastq.gz \
   --cut_right --cut_window_size 4 --cut_mean_quality 20 \
   -l 50 \
   --detect_adapter_for_pe \
@@ -128,6 +155,7 @@ Log files and reports from previous steps, e.g.:
 ```
 multiqc . -o multiqc_report
 ```
+
 
 ---
 
