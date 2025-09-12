@@ -20,10 +20,10 @@ mkdir -p "${MULTIQC_DIR}"
 # -----------------------------
 # 1. Build bowtie2 index (if not already done)
 # -----------------------------
-if [ ! -f "${HOST_INDEX}.1.bt2" ]; then
-    echo "Building Bowtie2 index for ${HOST_GENOME}..." | tee "${LOGDIR}/bowtie2-build.log"
-    bowtie2-build "${HOST_GENOME}" "${HOST_INDEX}" 2>&1 | tee -a "${LOGDIR}/bowtie2-build.log"
-fi
+#if [ ! -f "${HOST_INDEX}.1.bt2" ]; then
+#    echo "Building Bowtie2 index for ${HOST_GENOME}..." | tee "${LOGDIR}/bowtie2-build.log"
+#    bowtie2-build "${HOST_GENOME}" "${HOST_INDEX}" 2>&1 | tee -a "${LOGDIR}/bowtie2-build.log"
+#fi
 
 # -----------------------------
 # 2. Loop over single-end samples with logging
